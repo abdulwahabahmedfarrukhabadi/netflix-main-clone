@@ -1,4 +1,5 @@
 {
+  "name":"netflix-main-ldsiaf",
     "builds": [
       {
         "src": "backend/server.js",
