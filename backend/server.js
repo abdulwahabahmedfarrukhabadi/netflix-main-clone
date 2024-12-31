@@ -48,6 +48,10 @@ if (ENV_VARS.NODE_ENV === "production") {
 	});
 }
 
+  app.get("/", (req, res) => {
+    res.status(404).json({ message: "API route found" });
+  });
+
 app.listen(PORT, () => {
 	console.log("Server started at http://localhost:" + PORT);
 	connectDB();
