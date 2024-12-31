@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useContentStore } from "../store/content";
-import axios from "axios";
+import axiosInstance from "../axiosConfig";
 import { Link } from "react-router-dom";
 import { SMALL_IMG_BASE_URL } from "../utils/constants";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -18,7 +18,16 @@ const MovieSlider = ({ category }) => {
 
 	useEffect(() => {
 		const getContent = async () => {
-			const res = await axios.get(`/api/v1/${contentType}/${category}`);
+			const token = localStorage.getItem("token");
+			if(!token){
+				console.error("Authorization token is missing. Please log in.");
+				return
+			}
+
+			const res = await axiosInstance.get(`/api/v1/${contentType}/${category}`
+				,{ headers:{Authorization: `Beaker ${token}`},
+                withCredentials:true,
+			});
 			setContent(res.data.content);
 		};
 

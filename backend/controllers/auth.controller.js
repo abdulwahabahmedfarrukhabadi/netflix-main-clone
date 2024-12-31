@@ -35,7 +35,7 @@ export async function signup(req, res) {
 		const salt = await bcryptjs.genSalt(10);
 		const hashedPassword = await bcryptjs.hash(password, salt);
 
-		const PROFILE_PICS = ["/avatar1.png", "/avatar2.png", "/avatar3.png"];
+		const PROFILE_PICS = ["/profile_1.png", "/profile_2.png", "/profile_3.png"];
 
 		const image = PROFILE_PICS[Math.floor(Math.random() * PROFILE_PICS.length)];
 

@@ -12,7 +12,23 @@ import { connectDB } from "./config/db.js";
 import { protectRoute } from "./middleware/protectRoute.js";
 
 const app = express();
-app.use(cors)
+
+
+const allowedOrigins = [ENV_VARS.Client_URL];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 const PORT = ENV_VARS.PORT;
 const __dirname = path.resolve();
 
